@@ -10,13 +10,13 @@ contract Deed {
         _;
     }
 
-    constructor ( address _address, address payable _beneficiary, uint date)   {       // I define the construcotor as payble because  I want to send the funds upon deployment.
-        _address=lawyer;
+    constructor ( address _address, address payable _beneficiary, uint date) payable   {       // I define the construcotor as payble because  I want to send the funds upon deployment.
+        lawyer=_address;
         beneficiary = _beneficiary;
         donation_date = date +block.timestamp;
     }
 
-    function send_funds () private {                                                            //funds will be sent to the inheritor on the agreed date.
+    function send_funds () external onlyLawyer {                                                            //funds will be sent to the inheritor on the agreed date.
         require( block.timestamp >= donation_date, "Funds are still locked");
         beneficiary.transfer(address(this).balance);
 
