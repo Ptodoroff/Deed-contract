@@ -11,7 +11,7 @@ contract Deed {
     }
 
     constructor ( address _address, address payable _beneficiary, uint date) payable   {       // I define the construcotor as payble because  I want to send the funds upon deployment.
-        lawyer=_address;
+        lawyer= _address;
         beneficiary = _beneficiary;
         donation_date = date +block.timestamp;
     }
